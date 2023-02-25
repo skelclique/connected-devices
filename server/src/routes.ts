@@ -5,7 +5,9 @@ import fetch from "node-fetch";
 import sleep from 'sleep-promise';
 
 async function fetchMACVendors(mac: string) {
-  const response = await fetch(`https://api.macvendors.com/v1/lookup/${mac}`, { headers: { Authorization: "Bearer " + process.env.TOKEN }});
+  const response = await fetch(`https://api.macvendors.com/v1/lookup/${mac}`, 
+    { headers: { Authorization: "Bearer " + process.env.TOKEN }
+  });
 
   if (response.status === 200) {
     return JSON.parse(await response.text()).data.organization_name;
@@ -39,10 +41,10 @@ export async function routes(app: FastifyInstance) {
 
       await sleep(500);
 
-      if (connection == 'LAN') {
+      if (connection === 'LAN') {
         formattedDevices.push(eval(`\`${requestBody.lanTemplate}\``));
-      } else
-      if (connection.indexOf('SSID')) {
+      } else 
+      if (connection.indexOf('SSID') !== -1) {
         formattedDevices.push(eval(`\`${requestBody.wirelessTemplate}\``));
       } else {
         formattedDevices.push(`${name} (${mac})`);
