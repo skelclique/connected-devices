@@ -41,13 +41,19 @@ export async function routes(app: FastifyInstance) {
 
       await sleep(500);
 
-      if (connection === 'LAN') {
-        formattedDevices.push(eval(`\`${requestBody.lanTemplate}\``));
-      } else 
-      if (connection.indexOf('SSID') !== -1) {
-        formattedDevices.push(eval(`\`${requestBody.wirelessTemplate}\``));
-      } else {
-        formattedDevices.push(`${name} (${mac})`);
+      switch (connection) {
+        case 'LAN':
+          formattedDevices.push(eval(`\`${requestBody.lanTemplate}\``));
+        break;
+
+        case '2.4G_SSID':
+        case '5G_SSID':
+          formattedDevices.push(eval(`\`${requestBody.wirelessTemplate}\``));
+        break;
+      
+        default:
+          formattedDevices.push(`${name} (${mac})`);
+        break;
       }
     }
 
