@@ -68,7 +68,7 @@ export function App() {
     setLastDevices(unformattedDevices);
 
     await api
-      .post('/devices', {
+      .post('/', {
         unformattedDevices: unformattedDevices.trim(),
         lanTemplate: lan,
         wirelessTemplate: wireless,
