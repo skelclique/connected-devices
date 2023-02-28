@@ -5,7 +5,15 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#F2F3F5',
+        secondary: '#121214',
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-radix")(),
+  ],
+  darkMode: 'class',
 }
