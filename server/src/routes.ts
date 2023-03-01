@@ -33,7 +33,7 @@ export async function routes(app: FastifyInstance) {
     for (const device of unformattedDevices) {
       const [connection, lan,,, ip, dbm] = device;
 
-      const regex = /([A-Za-z0-9]+(-[A-Za-z0-9]+)+)/i;
+      const regex = /([A-Za-z0-9]+((-|:)[A-Za-z0-9]+)+)/i;
 
       const mac = device.find((prop) => regex.test(prop) ? prop : null) || '';
 
